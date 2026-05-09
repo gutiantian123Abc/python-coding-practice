@@ -39,7 +39,7 @@ class Solution:
         right = max(piles)
 
         while left + 1 < right:
-            mid = left + (right - left) // 2
+            mid = (left + right) // 2
             if self.can_finish(piles, h, mid):
                 right = mid
             else:
