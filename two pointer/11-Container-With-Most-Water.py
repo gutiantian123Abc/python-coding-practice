@@ -26,6 +26,9 @@ class Solution:
 
             if left_height < right_height:
                 left += 1
+            elif left_height == right_height:
+                left += 1
+                right -= 1
             else:
                 right -= 1
 
