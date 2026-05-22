@@ -22,37 +22,27 @@ piles.length <= H <= 10^9
 解释：4->30*1,11->30*1,20->30*1,23->30*1,30->30*1
 """
 
-from typing import (
-    List,
-)
-import math
-
 class Solution:
-    """
-    @param piles: an array
-    @param h: an integer
-    @return: the minimum integer K
-    """
-    def min_eating_speed(self, piles: List[int], h: int) -> int:
-        # Write your code here
-        left = 0
-        right = max(piles)
-
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        left, right = 1, max(piles)
         while left + 1 < right:
-            mid = (left + right) // 2
+            mid = left + (right - left) // 2
             if self.can_finish(piles, h, mid):
                 right = mid
             else:
                 left = mid
 
-        if left != 0 and self.can_finish(piles, h, left):
+        if self.can_finish(piles, h, left):
             return left
-
         return right
 
-    def can_finish(self, piles: List[int], h: int, speed: int) -> bool:
+
+    def can_finish(self, piles: List[int], h: int, k: int) -> bool:
         hours = 0
         for pile in piles:
-            hours += math.ceil(pile/speed)
+            hours += math.ceil(pile / k)
 
-        return hours <= h
+        if hours > h:
+            return False
+
+        return True
